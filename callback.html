@@ -1,0 +1,105 @@
+<html>
+    <head>
+        <title>Iteration 2 : Callback Page</title>
+        <style>
+          .button {
+              background-color: #1c87c9;
+              border: none;
+              color: white;
+              padding: 20px 34px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 20px;
+              margin: 4px 2px;
+              cursor: pointer;
+          }
+
+          span {
+              display: block;
+              word-wrap: break-word;
+              width: 1000px;
+              white-space: normal;
+              padding: 10px;
+              color: grey;
+              background-color: white;
+              border: black 2px solid;
+          }
+
+        </style>
+        <script type="text/javascript" src="lib/axios/dist/axios.standalone.js"></script>
+        <script type="text/javascript" src="lib/CryptoJS/rollups/hmac-sha256.js"></script>
+        <script type="text/javascript" src="lib/CryptoJS/rollups/sha256.js"></script>
+        <script type="text/javascript" src="lib/CryptoJS/components/hmac.js"></script>
+        <script type="text/javascript" src="lib/CryptoJS/components/enc-base64.js"></script>
+        <script type="text/javascript" src="lib/url-template/url-template.js"></script>
+        <script type="text/javascript" src="lib/apiGatewayCore/sigV4Client.js"></script>
+        <script type="text/javascript" src="lib/apiGatewayCore/apiGatewayClient.js"></script>
+        <script type="text/javascript" src="lib/apiGatewayCore/simpleHttpClient.js"></script>
+        <script type="text/javascript" src="lib/apiGatewayCore/utils.js"></script>
+        <script type="text/javascript" src="apigClient.js"></script>
+
+        <script src="https://sdk.amazonaws.com/js/aws-sdk-2.888.0.min.js"></script>
+
+    </head>
+
+    <body>
+        <div class="add-info">
+          <h2 style="font-style: italic;">The cognito authentication token for Iteration 2.2 is :</h2>
+            <span id="token"></span>
+        </div>
+
+        <br>
+
+        <h2 style="font-style: italic;">Cross Origin Resource Sharing (CORS) :</h2>
+        <p>CORS allows client web applications in one domain to interact with resources in a different domain.</p>
+
+        <p>This webapp has communication between two domains. </p>
+        <p>A static wesite hosted in an s3 bucket interacts with the API Gateway.</p>
+        <p>CORS is enabled on the API Gateway, and the webapp interacts with API Gateway via an SDK
+        generated from API Gateway.</p>
+
+        <h2 style="font-style: italic;">Amazon API Gateway, Lambda function call to retrieve data from DynamoDB :</h2>
+
+        <button class="button" onclick="getAllResources()">Click here to get DynamoDB data via API Gateway, using CORS and Cognito authorization</button>
+        <br>
+
+        <div class="cors-info">
+            <span id="myHikingInfo"></span>
+        </div>
+
+        <!-- <br>
+        <input type=button onclick="location.href='upload.html'" value='Upload Photo to Website'>
+        <br> -->
+
+        <script>
+          var authorization_str = "";
+
+          (function() {
+              var id_token_str = window.location.hash.split("&access_token=")[0];
+              authorization_str = id_token_str.replace("#id_token=", "");
+              document.getElementById("token").innerHTML = authorization_str;
+          })();
+
+          function getAllResources() {
+            var   authorizations = {
+                  headers: {
+                      Authorization: authorization_str
+                  }
+            };
+
+            var apigClient = apigClientFactory.newClient();
+            apigClient.myResourceGet({}, {}, authorizations).then(function (result) {
+                      document.getElementById("myHikingInfo").innerHTML = JSON.stringify(result.data, undefined, 2);
+            });
+          }
+
+          var elmnt = document.getElementById("myHikingInfo");
+          if(elmnt != null && elmnt != '') {
+            elmnt.scrollIntoView();
+          }
+
+        </script>
+
+    </body>
+</html>

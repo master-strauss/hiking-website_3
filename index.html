@@ -1,0 +1,117 @@
+<html>
+    <head>
+        <title>Iteration 2 Hiking Webpage</title>
+        <style type="text/css">
+          h2 {
+            text-align: left;
+            font-size: 30px;
+	         }
+	         img#getImage {
+              width: 500;
+              height: 300;
+              border: 4px solid #a1a1a1;
+	         }
+	         div {
+             text-align: left;
+	         }
+         </style>
+    </head>
+    <body>
+
+        <h1>
+          <span style="color:#000000;"> ~ Iteration 2.2.1 </span>
+          <span style="color:MediumSeaGreen;">Hiking</span>
+          <span style="color:#000000;"> ~ </span>
+          <span style="color:#0000ff;">Hillwalking</span>
+          <span style="color:#000000;"> ~ </span>
+          <span style="color:#ff0000;">Mountaineering</span>
+          <span style="color:#000000;"> ~ </span>
+        </h1>
+
+        <h3 style="font-style: italic;">Static content (images) hosted on Amazon S3 Bucket</h3>
+
+        <!--img src="hill-walking-1.jpg" width=500/ -->
+        <!-- img src="https://hikingbucket2-images.s3-eu-west-1.amazonaws.com/mountaineering-1.jpg" width=500/ -->
+
+        <div class="new-image">
+          <img src="hill-walking-1.jpg" id="getImage">
+        </div>
+
+        <br>
+        <button class="button" onclick="getHikingImage()">Change Image</button>
+        <input type=button onclick="location.href='upload.html'" value='Manage Website Images'>
+        <input type=button onclick="location.href='imageviewer.html'" value='View Website Images'>
+        <br>
+
+        <!--input type=button onClick="location.href='upload.html'" value='Upload a photo to your website' -->
+        <h3 style="font-style: italic;">Get dynamic content (text) from DynamoDB</h3>
+
+        <p>HTTPS endpoint call to Amazon API Gateway, which invokes Lambda function to retrieve data from DynamoDB.</p>
+        <!--p>Cognito authorization allows HTTPS endpoint call to Amazon API Gateway, which invokes Lambda function to retrieve data from DynamoDB.</p -->
+
+        <input type=button onclick="parent.location='https://x00170771-iteration-2.auth.eu-west-1.amazoncognito.com/login?client_id=kgu8o6jmfto5fquu17vttu302&response_type=token&scope=email+openid+profile&redirect_uri=https://dp1t51uwk3hda.cloudfront.net/callback.html'" value='Cognito Authentication'>
+        <!--input type=button onClick="parent.location='https://x00170771-webapp.auth.eu-west-1.amazoncognito.com/login?client_id=4104h0tqviq952tv6tv89s2pdo&response_type=token&scope=email+openid+profile&redirect_uri=https://myhikingbucket.s3-eu-west-1.amazonaws.com/callback.html'" value='Cognito Authorization'-->
+        <!--input type=button onClick="parent.location='https://x00170771-webapp.auth.eu-west-1.amazoncognito.com/login?client_id=4104h0tqviq952tv6tv89s2pdo&response_type=token&scope=email+openid+profile&redirect_uri=https://myhikingbucket.s3-eu-west-1.amazonaws.com/callback.html'" value='Cognito Authorization' -->
+
+                                                <!-- https://x00170771-cloud-project.auth.eu-west-1.amazoncognito.com/login?client_id=b6m9k76rn45g7m44fi5bs97t0&response_type=token&scope=email+openid+profile&redirect_uri=https://gg1a73hhg9.execute-api.eu-west-1.amazonaws.com/Prod/MyResource-->
+        <!-- input type=button onClick="parent.location='https://gg1a73hhg9.execute-api.eu-west-1.amazonaws.com/Stage/MyResource'" value='Dynamic Text' -->
+        <br>
+
+        <p>Link to All Trails Ireland.</p>
+        <input type=button onclick="parent.location='https://www.alltrails.com/ireland'" value='All Trails Ireland'>
+        <br><br>
+
+        <script src="https://sdk.amazonaws.com/js/aws-sdk-2.888.0.min.js"></script>
+        <script src="./manage-album.js"></script>
+        <script>
+
+
+            function doesFileExist(urlToFile)
+            {
+              var xhr = new XMLHttpRequest();
+              xhr.open('HEAD', urlToFile, false);
+              xhr.send();
+
+              if (xhr.status != "200") {
+                console.log("File doesn't exist");
+                return false;
+              } else {
+                console.log("File exists");
+                return true;
+              }
+            }
+
+            function getHikingImage() {
+                var Image_Id = document.getElementById('getImage');
+                if (Image_Id.src.match("hill-walking-1.jpg")) {
+                  Image_Id.src = "https://hikingbucket2-images.s3-eu-west-1.amazonaws.com/hiking/1.jpg";
+
+                  // var str1 = "https://hikingbucket2-images.s3-eu-west-1.amazonaws.com/hiking/1.jpg";
+                  // var str2 = "https://hikingbucket2-images.s3-eu-west-1.amazonaws.com/hiking/2.jpg";
+                  // var str3 = "https://hikingbucket2-images.s3-eu-west-1.amazonaws.com/hiking/3.jpg";
+                  //
+                  // Image_Id.src = str2;
+                  // if (str11 != null) {
+                  //   Image_Id.src = str1;
+                  // } else if (str2 ! = null){
+                  //   Image_Id.src = str2;
+                  // } else if (str3 ! = null){
+                  //   Image_Id.src = str3;
+                } else {
+                  Image_Id.src = "./4.jpg";
+                }
+                //   if (doesFileExist(str1)){
+                //     Image_Id.src = str1;
+                //   } else if (doesFileExist(str2)){
+                //     Image_Id.src = str2;
+                //   } else if (doesFileExist(str3)){
+                //     Image_Id.src = str3;
+                //   }
+                // } else {
+                //   Image_Id.src = "./4.jpg";
+                // }
+            }
+        </script>
+
+      </body>
+</html>
