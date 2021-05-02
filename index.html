@@ -82,7 +82,7 @@
               }
             }
 
-            function getHikingImage() {
+            function getHI() {
                 var Image_Id = document.getElementById('getImage');
                 if (Image_Id.src.match("hill-walking-1.jpg")) {
                   Image_Id.src = "https://hikingbucket2-images.s3-eu-west-1.amazonaws.com/hiking/1.jpg";
@@ -113,18 +113,16 @@
                 // }
             }
 
-            function getHI(){
+            function getHikingImage(){
 
                 var mimes = {
                     'jpg': 'data:image/jpg;base64,'
                 };
 
-                  AWS.config.update({
-                      signatureVersion: 'v4',
-                      region: 'eu-west-1',
-                      accessKeyId: 'AKIAZMN2XJIDHGQJ6NVR',
-                      secretAccessKey: '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'
-                  });
+<!--                  AWS.config.update({-->
+<!--                      signatureVersion: 'v4',-->
+<!--                      region: 'eu-west-1',-->
+<!--                  });-->
 
                   var bucket = new AWS.S3({params: {Bucket: 'hikingbucket2-images'}});
 
