@@ -6,7 +6,6 @@ var IdentityPoolId = "eu-west-1:8fa684c0-aabb-4197-9870-4356625de358";
 AWS.config.region = 'eu-west-1'; // Region
 AWS.config.credentials = new AWS.CognitoIdentityCredentials({
     IdentityPoolId: 'eu-west-1:8fa684c0-aabb-4197-9870-4356625de358',
-    RoleArn: 'arn:aws:iam::645173561862:role/Cognito_Iteration2IdentityPoolUnauth_Role',
 });
 
 //AWS.config.update({
