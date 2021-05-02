@@ -39,6 +39,7 @@
 
         <br>
         <button class="button" onclick="getHikingImage()">Change Image</button>
+        <button class="button" onclick="getHI()">S3 Image via Credentials</button>
         <input type=button onclick="location.href='upload.html'" value='Manage Website Images'>
         <input type=button onclick="location.href='imageviewer.html'" value='View Website Images'>
         <br>
@@ -84,7 +85,7 @@
             function getHikingImage() {
                 var Image_Id = document.getElementById('getImage');
                 if (Image_Id.src.match("hill-walking-1.jpg")) {
-                  Image_Id.src = "https://hikingbucket2-images.s3-eu-west-1.amazonaws.com/hiking/1.jpg";
+                  Image_Id.src = "https://hikingbucket-images.s3-eu-west-1.amazonaws.com/1.jpg";
 
                   // var str1 = "https://hikingbucket3-images.s3-eu-west-1.amazonaws.com/images/1.jpg";
                   // var str2 = "https://hikingbucket3-images.s3-eu-west-1.amazonaws.com/images/2.jpg";
@@ -110,6 +111,49 @@
                 // } else {
                 //   Image_Id.src = "./4.jpg";
                 // }
+            }
+
+            function getHI(){
+
+                var mimes = {
+                    'jpg': 'data:image/jpg;base64,'
+                };
+
+                  AWS.config.update({
+                      signatureVersion: 'v4',
+                      region: 'eu-west-1',
+                      accessKeyId: 'AKIAZMN2XJIDHGQJ6NVR',
+                      secretAccessKey: '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'
+                  });
+
+                  var bucket = new AWS.S3({params: {Bucket: 'hikingbucket2-images'}});
+
+                  function encode(data)
+                  {
+                      var str = data.reduce(function(a,b){ return a+String.fromCharCode(b) },'');
+                      return btoa(str).replace(/.{76}(?=.)/g,'$&\n');
+                  }
+
+                  function getUrlByFileName(fileName,mimeType) {
+                      return new Promise(
+                          function (resolve, reject) {
+                              bucket.getObject({Key: fileName}, function (err, file) {
+                                  var result =  mimeType + encode(file.Body);
+                                  resolve(result)
+                              });
+                          }
+                      );
+                  }
+
+                  function openInNewTab(url) {
+                      var redirectWindow = window.open(url, '_blank');
+                      redirectWindow.location;
+                  }
+
+                  getUrlByFileName('sprites.png', mimes.jpg).then(function(data) {
+                      //openInNewTab(data);
+                      document.querySelector('img5').src = data;
+                  });
             }
         </script>
 
