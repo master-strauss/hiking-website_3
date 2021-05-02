@@ -118,10 +118,10 @@
                     'jpg': 'data:image/jpg;base64,'
                 };
 
-<!--                  AWS.config.update({-->
-<!--                      signatureVersion: 'v4',-->
-<!--                      region: 'eu-west-1',-->
-<!--                  });-->
+                  AWS.config.update({
+                      signatureVersion: 'v4',
+                      region: 'eu-west-1'
+                  });
 
                   var bucket = new AWS.S3({params: {Bucket: 'hikingbucket2-images'}});
 
