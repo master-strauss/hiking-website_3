@@ -11,9 +11,9 @@ AWS.creds = new AWS.CognitoIdentityCredentials({
 AWS.config.credentials = creds;
 
 AWS.config.update({
-  region: bucketRegion,
-  credentials: new AWS.CognitoIdentityCredentials({
-    IdentityPoolId: IdentityPoolId
+  region: bucketRegion
+//  credentials: new AWS.CognitoIdentityCredentials({
+//    IdentityPoolId: IdentityPoolId
   })
 });
 

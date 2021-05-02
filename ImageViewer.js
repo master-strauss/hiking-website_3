@@ -18,6 +18,13 @@ AWS.creds = new AWS.CognitoIdentityCredentials({
 });
 AWS.config.credentials = creds;
 
+AWS.config.update({
+  region: 'eu-west-1'
+//  credentials: new AWS.CognitoIdentityCredentials({
+//    IdentityPoolId: IdentityPoolId
+  })
+});
+
 
 // Make the call to obtain credentials
 // AWS.config.credentials.get(function(){
