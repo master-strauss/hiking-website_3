@@ -28,7 +28,7 @@
           <span style="color:#000000;"> ~ </span>
         </h1>
 
-        <h4 style="font-style: italic;">Static content (images) hosted on Amazon S3 Bucket</h4>
+        <h3 style="font-style: italic;">Static content (images) hosted on Amazon S3 Bucket</h3>
 
         <!--img src="hill-walking-1.jpg" width=500/ -->
         <!-- img src="https://hikingbucket2-images.s3-eu-west-1.amazonaws.com/mountaineering-1.jpg" width=500/ -->
@@ -37,17 +37,17 @@
           <img src="./images/hill-walking-1.jpg" id="getImage">
         </div>
 
-        <h4 style="font-style: italic;">Cognito identity pools used to access S3 Bucket images</h4>
-        <br>
+        <h3 style="font-style: italic;">Cognito identity pools used to access S3 Bucket images</h3>
+
         <button class="button" onclick="getHikingImage1()">Change Image</button>
         <input type=button onclick="location.href='upload.html'" value='Manage Website Images'>
         <input type=button onclick="location.href='imageviewer.html'" value='View Website Images'>
         <br>
 
         <!--input type=button onClick="location.href='upload.html'" value='Upload a photo to your website' -->
-        <h4 style="font-style: italic;">Get dynamic content (text) from DynamoDB</h4>
+        <h3 style="font-style: italic;">Get dynamic content (text) from DynamoDB</h3>
 
-        <p>HTTPS endpoint call -> Amazon API Gateway -> Lambda to retrieve Dynamic content data from DynamoDB.</p>
+        <p>HTTPS endpoint call to Amazon API Gateway and Lambda to retrieve Dynamic content from DynamoDB.</p>
         <!--p>Cognito authorization allows HTTPS endpoint call to Amazon API Gateway, which invokes Lambda function to retrieve data from DynamoDB.</p -->
 
         <input type=button onclick="parent.location='https://x00170771-iteration-2.auth.eu-west-1.amazoncognito.com/login?client_id=kgu8o6jmfto5fquu17vttu302&response_type=token&scope=email+openid+profile&redirect_uri=https://dp1t51uwk3hda.cloudfront.net/callback.html'" value='Cognito Authentication'>
