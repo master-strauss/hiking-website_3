@@ -4,18 +4,17 @@ var IdentityPoolId = "eu-west-1:8fa684c0-aabb-4197-9870-4356625de358";
 
 // Initialize the Amazon Cognito credentials provider
 AWS.config.region = 'eu-west-1'; // Region
-AWS.creds = new AWS.CognitoIdentityCredentials({
+AWS.config.credentials = new AWS.CognitoIdentityCredentials({
     IdentityPoolId: 'eu-west-1:8fa684c0-aabb-4197-9870-4356625de358',
     RoleArn: 'arn:aws:iam::645173561862:role/Cognito_Iteration2IdentityPoolUnauth_Role',
 });
-AWS.config.credentials = creds;
 
-AWS.config.update({
-  region: bucketRegion
+//AWS.config.update({
+//  region: bucketRegion,
 //  credentials: new AWS.CognitoIdentityCredentials({
 //    IdentityPoolId: IdentityPoolId
-  })
-});
+//  })
+//});
 
 var s3 = new AWS.S3({
   apiVersion: "2006-03-01",
