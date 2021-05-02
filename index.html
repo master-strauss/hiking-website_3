@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Iteration 2 Hiking Webpage</title>
+        <title>Iteration 3 Hiking Webpage</title>
         <style type="text/css">
           h2 {
             text-align: left;
@@ -19,7 +19,7 @@
     <body>
 
         <h1>
-          <span style="color:#000000;"> ~ Iteration 2.2.1 </span>
+          <span style="color:#000000;"> ~ Iteration 3 </span>
           <span style="color:MediumSeaGreen;">Hiking</span>
           <span style="color:#000000;"> ~ </span>
           <span style="color:#0000ff;">Hillwalking</span>
@@ -34,7 +34,7 @@
         <!-- img src="https://hikingbucket2-images.s3-eu-west-1.amazonaws.com/mountaineering-1.jpg" width=500/ -->
 
         <div class="new-image">
-          <img src="hill-walking-1.jpg" id="getImage">
+          <img src="./images/hill-walking-1.jpg" id="getImage">
         </div>
 
         <br>
@@ -84,7 +84,7 @@
             function getHikingImage() {
                 var Image_Id = document.getElementById('getImage');
                 if (Image_Id.src.match("hill-walking-1.jpg")) {
-                  Image_Id.src = "https://hikingbucket2-images.s3-eu-west-1.amazonaws.com/hiking/1.jpg";
+                  Image_Id.src = "https://hikingbucket2-images.s3-eu-west-1.amazonaws.com/hiking/images/1.jpg";
 
                   // var str1 = "https://hikingbucket2-images.s3-eu-west-1.amazonaws.com/hiking/1.jpg";
                   // var str2 = "https://hikingbucket2-images.s3-eu-west-1.amazonaws.com/hiking/2.jpg";
@@ -98,7 +98,7 @@
                   // } else if (str3 ! = null){
                   //   Image_Id.src = str3;
                 } else {
-                  Image_Id.src = "./4.jpg";
+                  Image_Id.src = "./images/4.jpg";
                 }
                 //   if (doesFileExist(str1)){
                 //     Image_Id.src = str1;
