@@ -17,8 +17,9 @@ AWS.config.credentials = new AWS.CognitoIdentityCredentials({
 
 var s3 = new AWS.S3({
   apiVersion: "2006-03-01",
-  params: { Bucket: albumBucketName }
+  params: { Bucket: 'hikingbucket2-images'}
 });
+
 
 function listAlbums() {
   s3.listObjects({ Delimiter: "/" }, function(err, data) {
