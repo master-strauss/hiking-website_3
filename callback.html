@@ -89,7 +89,7 @@
             };
 
             var apigClient = apigClientFactory.newClient();
-            apigClient.myResourceGet({}, {}, authorizations).then(function (result) {
+            apigClient.rootGet({}, {}, authorizations).then(function (result) {
                       document.getElementById("myHikingInfo").innerHTML = JSON.stringify(result.data, undefined, 2);
             });
           }
