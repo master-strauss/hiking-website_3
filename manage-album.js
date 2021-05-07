@@ -17,9 +17,8 @@ AWS.config.credentials = new AWS.CognitoIdentityCredentials({
 
 var s3 = new AWS.S3({
   apiVersion: "2006-03-01",
-  params: { Bucket: 'hikingbucket2-images'}
+  params: { Bucket: albumBucketName }
 });
-
 
 function listAlbums() {
   s3.listObjects({ Delimiter: "/" }, function(err, data) {
@@ -83,6 +82,42 @@ function createAlbum(albumName) {
       viewAlbum(albumName);
     });
   });
+}
+
+function getHikingImageX(){
+
+    var mimes = {
+        'jpg': 'data:image/jpg;base64,'
+    };
+
+    var bucket = new AWS.S3({apiVersion: '2006-03-01',params: {Bucket: 'hikingbucket2-images'}});
+
+    function encode(data)
+    {
+        var str = data.reduce(function(a,b){ return a+String.fromCharCode(b) },'');
+        return btoa(str).replace(/.{76}(?=.)/g,'$&\n');
+    }
+
+    function getUrlByFileName(fileName,mimeType) {
+        return new Promise(
+            function (resolve, reject) {
+                bucket.getObject({Key: fileName}, function (err, file) {
+                    var result =  mimeType + encode(file.Body);
+                    resolve(result)
+                });
+            }
+        );
+    }
+
+    function openInNewTab(url) {
+        var redirectWindow = window.open(url, '_blank');
+        redirectWindow.location;
+    }
+
+    getUrlByFileName('5.jpg', mimes.jpg).then(function(data) {
+        //openInNewTab(data);
+        document.querySelector('img').src = data;
+    });
 }
 
 function viewAlbum(albumName) {
